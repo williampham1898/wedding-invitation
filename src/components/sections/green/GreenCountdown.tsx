@@ -2,7 +2,7 @@ import useCountdownTz from '../../../hooks/useCountdownTz'
 import type { SectionProps } from '../../../types'
 import { galleryImg, GREEN, GREEN_ASSETS, pad2 } from './theme'
 
-const PHOTO = galleryImg(3)
+const PHOTO = galleryImg(1)
 const QUOTE = 'Every moment with you feels painted in gentle light.'
 
 export default function GreenCountdown({ data }: SectionProps) {
@@ -28,7 +28,7 @@ export default function GreenCountdown({ data }: SectionProps) {
             src={PHOTO}
             alt=""
             className="h-full w-full object-cover"
-            style={{ objectPosition: 'center 28%' }}
+            style={{ objectPosition: 'center 40%' }}
           />
           <div className="flex items-center px-5 md:px-8" style={{ backgroundColor: GREEN.sageDeep }}>
             <p

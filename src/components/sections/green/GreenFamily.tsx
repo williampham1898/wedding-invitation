@@ -3,7 +3,7 @@ import { galleryImg, GREEN } from './theme'
 
 // Đổi ảnh tại đây khi chỉnh sửa
 const PHOTO = galleryImg(7)
-const PHOTO_POSITION = 'center 28%'
+const PHOTO_POSITION = 'center 35%'
 
 function FamilyColumn({ person, houseLabel }: { person: Person; houseLabel: string }) {
   return (
