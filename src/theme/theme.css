@@ -1,0 +1,127 @@
+@import "tailwindcss";
+@import "./tokens.css";
+@import "./pen.css";
+@source not "../../docs";
+
+@theme inline {
+  --color-primary: var(--color-primary);
+  --color-primary-deep: var(--color-primary-deep);
+  --color-primary-light: var(--color-primary-light);
+  --color-accent: var(--color-accent);
+  --color-soft: var(--color-soft);
+  --color-text: var(--color-text);
+  --color-surface: var(--color-surface);
+  --font-heading: var(--font-heading);
+  --font-script: var(--font-script);
+  --font-body: var(--font-body);
+  --font-serif-alt: var(--font-serif-alt);
+  --font-welcome: var(--font-welcome);
+  --text-hero: var(--text-hero);
+  --text-section-title: var(--text-section-title);
+  --text-body: var(--text-body);
+  --spacing-section: var(--section-pad-y);
+  --radius-card: var(--radius-card);
+  --container-max: var(--container-max);
+  --shadow-button: var(--shadow-button);
+  --shadow-button-hover: var(--shadow-button-hover);
+  --shadow-player: var(--shadow-player);
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background: var(--color-surface);
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%);
+  }
+  60%,
+  100% {
+    transform: translateX(200%);
+  }
+}
+
+/* Self-hosted fonts (original template's font-face set) */
+@font-face {
+  font-family: "Viaoda Libre";
+  src: url("../assets/fonts/ViaodaLibre-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Alex Brush";
+  src: url("../assets/fonts/AlexBrush-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Cormorant Garamond";
+  src: url("../assets/fonts/CormorantGaramond-Variable.ttf") format("truetype-variations");
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "EB Garamond";
+  src: url("../assets/fonts/EBGaramond-Variable.ttf") format("truetype-variations");
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Libre Baskerville";
+  src: url("../assets/fonts/LibreBaskerville-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Libre Baskerville";
+  src: url("../assets/fonts/LibreBaskerville-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@keyframes seal-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+@keyframes seal-pop {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  35% {
+    transform: scale(1.16) rotate(-8deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.animate-seal-pulse {
+  animation: seal-pulse 2.2s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.animate-seal-pop {
+  animation: seal-pop 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transform-origin: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-seal-pulse,
+  .animate-seal-pop {
+    animation: none;
+  }
+}
