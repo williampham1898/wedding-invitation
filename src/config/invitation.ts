@@ -13,7 +13,8 @@ const img = (path: string) => withBase(path)
 const RSVP_SHEETS = {
   thanhpb:
     'https://script.google.com/macros/s/AKfycbx9XWkS78RKMez2o5T_OhevwTiz1HcriQKHQY_xv2-LR3tn1ErCkrq1TlApmefJguyiDw/exec',
-  linhbd: '',
+  linhbd: 
+    'https://script.google.com/macros/s/AKfycbwGQUgVvQUWIYToa0kc5IYqKmb_puwCMTSoBF18aegNRchGr08gaCxeFMg0FiXMis6rZA/exec',
 }
 
 const guestSchedule = [
