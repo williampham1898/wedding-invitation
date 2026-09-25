@@ -40,10 +40,10 @@ const RSVP_SHEETS = {
 ## 5. Test
 - Gửi form trên `/thanhpb` → chỉ sheet nhà trai có dòng mới.
 - Gửi form trên `/linhbd` → chỉ sheet nhà gái có dòng mới.
-- Mỗi sheet có tab `RSVP`: Timestamp | Name | Attending | Guests | Wish | Event.
+- Mỗi sheet có tab `RSVP`: Timestamp | Name | Attending | Transport | Wish.
 - You don't need to create the `RSVP` tab yourself — the script creates it with
-  headers on the first submission. If the sheet already has the old `Answers`
-  header, the next request upgrades the header row to `Wish` + `Event`.
+  headers on the first submission. If the sheet still has old columns
+  (`Guests`, `Event`, …), the next request rewrites the header row.
 
 ## Updating the script later
 After editing Code.gs in the Apps Script editor, you must deploy a **new version**

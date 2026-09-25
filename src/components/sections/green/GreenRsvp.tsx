@@ -6,10 +6,11 @@ import { GREEN } from './theme'
 interface FormState {
   name: string
   attending: 'yes' | 'no' | ''
+  transport: 'self' | 'shuttle' | ''
   wish: string
 }
 
-const initialForm: FormState = { name: '', attending: '', wish: '' }
+const initialForm: FormState = { name: '', attending: '', transport: '', wish: '' }
 
 const fieldClass =
   'w-full rounded-md border bg-white/75 px-4 py-2.5 outline-none placeholder:opacity-50'
@@ -61,6 +62,10 @@ export default function GreenRsvp({ data }: SectionProps) {
       setError(rsvp.attendError)
       return
     }
+    if (form.attending === 'yes' && !form.transport) {
+      setError(rsvp.transportError)
+      return
+    }
     setError('')
     if (!rsvp.endpoint) {
       setSubmitted(true)
@@ -73,12 +78,14 @@ export default function GreenRsvp({ data }: SectionProps) {
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify({
           name: form.name.trim(),
-          attending: form.attending,
+          attending: form.attending === 'yes' ? rsvp.acceptLabel : rsvp.declineLabel,
+          transport:
+            form.attending === 'yes'
+              ? form.transport === 'self'
+                ? rsvp.selfTransportLabel
+                : rsvp.shuttleTransportLabel
+              : '',
           wish: form.wish.trim(),
-          event: data.event.title,
-          answers: form.wish.trim()
-            ? [{ question: rsvp.wishLabel, answer: form.wish.trim() }]
-            : [],
         }),
       })
       const json = (await res.json()) as { ok?: boolean }
@@ -150,7 +157,13 @@ export default function GreenRsvp({ data }: SectionProps) {
                       name="attending"
                       value={choice}
                       checked={form.attending === choice}
-                      onChange={() => setForm({ ...form, attending: choice })}
+                      onChange={() =>
+                        setForm({
+                          ...form,
+                          attending: choice,
+                          transport: choice === 'yes' ? form.transport : '',
+                        })
+                      }
                       className="sr-only"
                     />
                     <Choice selected={form.attending === choice}>
@@ -160,6 +173,48 @@ export default function GreenRsvp({ data }: SectionProps) {
                 ))}
               </div>
             </div>
+
+            {form.attending === 'no' && data.gift.qrCodes?.[0] ? (
+              <div className="text-center">
+                <img
+                  src={data.gift.qrCodes[0].image}
+                  alt={data.gift.title}
+                  className="mx-auto aspect-square w-[96px] rounded-sm bg-white object-contain p-1 md:w-[104px]"
+                  style={{ border: `1px solid ${GREEN.sage}33` }}
+                />
+                <p
+                  className="mt-2 text-[12px] tracking-[0.04em]"
+                  style={{ fontFamily: 'var(--font-serif-alt)', color: GREEN.inkDeep }}
+                >
+                  {data.gift.title}
+                </p>
+              </div>
+            ) : null}
+
+            {form.attending === 'yes' ? (
+              <div>
+                <span className="mb-2 block text-sm" style={{ fontFamily: 'var(--font-serif-alt)' }}>
+                  {rsvp.transportLabel}
+                </span>
+                <div className="flex gap-3">
+                  {(['self', 'shuttle'] as const).map((choice) => (
+                    <label key={choice} className="flex flex-1">
+                      <input
+                        type="radio"
+                        name="transport"
+                        value={choice}
+                        checked={form.transport === choice}
+                        onChange={() => setForm({ ...form, transport: choice })}
+                        className="sr-only"
+                      />
+                      <Choice selected={form.transport === choice}>
+                        {choice === 'self' ? rsvp.selfTransportLabel : rsvp.shuttleTransportLabel}
+                      </Choice>
+                    </label>
+                  ))}
+                </div>
+              </div>
+            ) : null}
 
             <div>
               <label

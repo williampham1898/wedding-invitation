@@ -28,7 +28,7 @@ export default function GreenThankYou({ data }: SectionProps) {
         className="relative font-script leading-none"
         style={{ fontSize: 'clamp(2.75rem, 11vw, 4.25rem)', color: GREEN.sage }}
       >
-        Cảm ơn
+        Trân trọng
       </h2>
 
       <div className="relative mt-5 flex items-center justify-center gap-3">

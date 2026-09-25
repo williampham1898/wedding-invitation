@@ -15,12 +15,12 @@ function FamilyColumn({ person, houseLabel }: { person: Person; houseLabel: stri
         {houseLabel}
       </p>
       <p
-        className="text-[16px] leading-relaxed md:text-[20px]"
+        className="text-[14px] leading-relaxed md:text-[18px]"
         style={{ fontFamily: 'var(--font-serif-alt)' }}
       >
-        Ông. {person.father}
+        Bố. {person.father}
         <br />
-        Bà. {person.mother}
+        Mẹ. {person.mother}
       </p>
       <p
         className="mx-auto mt-3 max-w-[11rem] whitespace-pre-line text-[13px] leading-snug md:max-w-[14rem] md:text-[16px]"

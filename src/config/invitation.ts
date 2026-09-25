@@ -12,9 +12,9 @@ const img = (path: string) => withBase(path)
  */
 const RSVP_SHEETS = {
   thanhpb:
-    'https://script.google.com/macros/s/AKfycbx9XWkS78RKMez2o5T_OhevwTiz1HcriQKHQY_xv2-LR3tn1ErCkrq1TlApmefJguyiDw/exec',
+    'https://script.google.com/macros/s/AKfycbybOlScxK73n9-YCcJe6XWCD-ov_vTHPzF92HE8A3dSLIGCf75enrKhPTQuZdOYKous4g/exec',
   linhbd: 
-    'https://script.google.com/macros/s/AKfycbwGQUgVvQUWIYToa0kc5IYqKmb_puwCMTSoBF18aegNRchGr08gaCxeFMg0FiXMis6rZA/exec',
+    'https://script.google.com/macros/s/AKfycbxDFP-I4S2QBuxbrq7ppyEN4bhCE3JHqHDzRTvzfxUfrTDKJwpSlA_y8WSqYTGBysKAqw/exec',
 }
 
 const guestSchedule = [
@@ -89,14 +89,14 @@ const shared = {
     layout: 'masonry' as const,
     images: [
       { url: img('/gallery/1.jpg'), alt: '' },
-      { url: img('/gallery/2.jpg'), alt: '' },
+      { url: img('/gallery/5.jpg'), alt: '' },
       { url: img('/gallery/3.jpg'), alt: '' },
       { url: img('/gallery/4.jpg'), alt: '' },
       { url: img('/gallery/9.jpg'), alt: '' },
       { url: img('/gallery/6.jpg'), alt: '' },
       { url: img('/gallery/7.jpg'), alt: '' },
       { url: img('/gallery/8.jpg'), alt: '' },
-      { url: img('/gallery/5.jpg'), alt: '' },
+      { url: img('/gallery/2.jpg'), alt: '' },
       { url: img('/gallery/10.jpg'), alt: '' },
     ],
   },
@@ -104,10 +104,7 @@ const shared = {
     title: 'Hộp mừng cưới',
     thankYou: 'Cảm ơn bạn đã trở thành một phần trong câu chuyện của chúng tôi.',
     accounts: [],
-    qrCodes: [
-      { label: 'Nhà trai — Bá Thanh', image: img('/qr/groom.png') },
-      { label: 'Nhà gái — Đan Linh', image: img('/qr/bride.png') },
-    ],
+    qrCodes: [],
   },
   music: {
     src: img('/music/canon-in-d-cello-piano.mp3'),
@@ -126,8 +123,12 @@ const rsvpBase = {
   attendLabel: 'Bạn có tham dự được không?*',
   acceptLabel: 'Rất vui sẽ tham dự',
   declineLabel: 'Rất tiếc không tham dự',
+  transportLabel: 'Bạn sẽ di chuyển thế nào?*',
+  selfTransportLabel: 'Tự di chuyển',
+  shuttleTransportLabel: 'Di chuyển theo xe',
   nameError: 'Vui lòng nhập tên của bạn.',
   attendError: 'Vui lòng cho chúng tôi biết bạn có tham dự không.',
+  transportError: 'Vui lòng cho chúng tôi biết cách bạn di chuyển.',
   submitError: 'Gửi không thành công. Vui lòng thử lại sau.',
   questions: [] as { id: string; type: 'yesno' | 'choice'; label: string }[],
   wishLabel: 'Lời chúc',
@@ -164,6 +165,10 @@ export const invitationGroom: InvitationData = {
     ...rsvpBase,
     endpoint: RSVP_SHEETS.thanhpb,
   },
+  gift: {
+    ...shared.gift,
+    qrCodes: [{ label: 'Nhà trai — Bá Thanh', image: img('/qr/groom.png') }],
+  },
 }
 
 /** Thiệp nhà gái — /linhbd */
@@ -199,5 +204,9 @@ export const invitationBride: InvitationData = {
   rsvp: {
     ...rsvpBase,
     endpoint: RSVP_SHEETS.linhbd,
+  },
+  gift: {
+    ...shared.gift,
+    qrCodes: [{ label: 'Nhà gái — Đan Linh', image: img('/qr/bride.png') }],
   },
 }

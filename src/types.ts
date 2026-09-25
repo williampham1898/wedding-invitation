@@ -100,8 +100,12 @@ export interface InvitationData {
     attendLabel: string
     acceptLabel: string
     declineLabel: string
+    transportLabel: string
+    selfTransportLabel: string
+    shuttleTransportLabel: string
     nameError: string
     attendError: string
+    transportError: string
     submitError: string
     questions: RsvpQuestion[]
     wishLabel: string

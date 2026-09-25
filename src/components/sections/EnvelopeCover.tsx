@@ -1,5 +1,6 @@
 import { withBase } from '../../lib/withBase'
 import type { InvitationData } from '../../types'
+import { GREEN } from './green/theme'
 
 const theme = (file: string) => withBase(`/images/themes/green-themes/${file}`)
 
@@ -25,6 +26,17 @@ function formatDotDate(isoDate: string) {
   return `${day}.${month}.${year}`
 }
 
+// Polaroid PNG is 550×646 and the card/hole are rotated ~4.4° clockwise.
+// Window matches the hole (433×437) plus a small bleed under the white
+// border so the photo fills the opening without escaping the card.
+const POLAROID_WINDOW = {
+  top: '8.6%',
+  left: '9.6%',
+  width: '81.4%',
+  height: '70.0%',
+  transform: 'rotate(4.4deg)',
+}
+
 function Polaroid({
   src,
   alt,
@@ -40,16 +52,7 @@ function Polaroid({
 }) {
   return (
     <div className="relative w-full">
-      <div
-        className="absolute overflow-hidden"
-        style={{
-          top: '9%',
-          left: '13.5%',
-          width: '71%',
-          height: '61%',
-          transform: 'rotate(4.2deg)',
-        }}
-      >
+      <div className="absolute overflow-hidden" style={POLAROID_WINDOW}>
         <img
           src={src}
           alt={alt}
@@ -75,8 +78,8 @@ function Polaroid({
             bottom: '8%',
             left: '50%',
             transform: 'translateX(-50%) rotate(4.2deg)',
-            fontSize: 'clamp(11px, 3.1vw, 16px)',
-            letterSpacing: '0.14em',
+            fontSize: 'clamp(14px, 4.2vw, 21px)',
+            letterSpacing: '0.12em',
           }}
         >
           {date}
@@ -117,7 +120,18 @@ export default function EnvelopeCover({
       className={`relative w-full ${stage === 'open' ? 'overflow-hidden' : 'overflow-visible'}`}
       style={{ background: PAPER_BG }}
     >
-      <div className="relative mx-auto w-full max-w-[520px] px-6 pb-16 pt-8 md:max-w-[680px] md:px-8 md:pb-20 md:pt-10">
+      <div className="relative mx-auto w-full max-w-[520px] px-6 pb-6 pt-5 md:max-w-[680px] md:px-8 md:pb-8 md:pt-6">
+        {stage === 'open' ? (
+          <p
+            className="font-script mb-1 text-center leading-none md:mb-2"
+            style={{
+              fontSize: 'clamp(2.55rem, 9.5vw, 3.6rem)',
+              color: GREEN.sage,
+            }}
+          >
+            Save the date
+          </p>
+        ) : null}
         <div
           className={`relative aspect-[3/4] w-full select-none ${tucked ? 'overflow-hidden' : 'overflow-visible'}`}
         >
@@ -146,8 +160,8 @@ export default function EnvelopeCover({
               src={couplePhoto}
               alt={`${data.couple.groom.shortName} & ${data.couple.bride.shortName}`}
               date={dateLabel}
-              photoPosition="center 62%"
-              photoScale={1.4}
+              photoPosition="center 41%"
+              photoScale={1}
             />
           </div>
 
